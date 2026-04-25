@@ -17,6 +17,7 @@ def run_experiment(
     max_iterations: int = 20,
     straggler: StragglerInjector = None,
     simulated_bu: float = 0.0,
+    simulated_gd: float = None,
     learning_rate: float = 0.01
 ):
     print(f"Starting {exp_name} with {num_workers} workers.")
@@ -31,6 +32,8 @@ def run_experiment(
     
     monitor = ARSSMonitor(num_workers=num_workers, k=3)
     monitor.set_simulated_bu(simulated_bu)
+    if simulated_gd is not None:
+        monitor.set_simulated_gd(simulated_gd)
     
     ps_backend = PSBackend(initial_params, learning_rate)
     ring_backend = RingBackend(num_workers, initial_params, learning_rate)

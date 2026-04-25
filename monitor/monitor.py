@@ -32,6 +32,9 @@ class ARSSMonitor:
     def set_simulated_bu(self, bu: float):
         self.decision_engine.simulated_bu = bu
 
+    def set_simulated_gd(self, gd: float):
+        self.decision_engine.simulated_gd = gd
+
     def run(self, max_iterations: int):
         current_strategy = self.decision_engine.current_strategy
         

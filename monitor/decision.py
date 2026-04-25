@@ -8,10 +8,12 @@ class DecisionEngine:
         self.history: List[str] = []
         # External override for simulated Bandwidth Utilization
         self.simulated_bu = 0.0
+        # External override for simulated Gradient Density
+        self.simulated_gd = None
         
     def decide(self, metrics: IterationMetrics) -> str:
         sr = metrics.straggler_ratio
-        gd = metrics.avg_gradient_density
+        gd = self.simulated_gd if self.simulated_gd is not None else metrics.avg_gradient_density
         bu = self.simulated_bu
         
         target = "Ring"
