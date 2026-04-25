@@ -22,6 +22,10 @@ class ARSSMonitor:
         self.decision_engine = DecisionEngine(k=k)
         self.metrics_collector = MetricsCollector()
         self.is_running = mp.Value('b', True)
+        self.simulation_schedule = {} # iteration -> {'bu': float, 'gd': float}
+        
+    def set_simulation_schedule(self, schedule: dict):
+        self.simulation_schedule = schedule
         
     def get_worker_conn(self, worker_id: int):
         return self.worker_strategy_conns[worker_id]
@@ -30,9 +34,13 @@ class ARSSMonitor:
         return self.signal_queue
         
     def set_simulated_bu(self, bu: float):
+        if self.decision_engine.simulated_bu != bu:
+            print(f"[Monitor] Updating simulated BU to {bu}")
         self.decision_engine.simulated_bu = bu
 
     def set_simulated_gd(self, gd: float):
+        if self.decision_engine.simulated_gd != gd:
+            print(f"[Monitor] Updating simulated GD to {gd}")
         self.decision_engine.simulated_gd = gd
 
     def run(self, max_iterations: int):
@@ -47,6 +55,7 @@ class ARSSMonitor:
                 signal: WorkerSignal = self.signal_queue.get(timeout=1.0)
                 
                 iter_idx = signal.iteration
+                
                 if iter_idx not in metrics_buffer:
                     metrics_buffer[iter_idx] = IterationMetrics(iteration=iter_idx)
                     
@@ -66,6 +75,19 @@ class ARSSMonitor:
                 
                 # If we have all signals for this iteration, run decision engine
                 if len(metrics.timestamps) == self.num_workers:
+                    # Apply simulation schedule updates for THIS iteration
+                    effective_params = {}
+                    for scheduled_iter in sorted(self.simulation_schedule.keys()):
+                        if scheduled_iter <= iter_idx:
+                            effective_params.update(self.simulation_schedule[scheduled_iter])
+                        else:
+                            break
+                    
+                    if 'bu' in effective_params:
+                        self.set_simulated_bu(effective_params['bu'])
+                    if 'gd' in effective_params:
+                        self.set_simulated_gd(effective_params['gd'])
+                        
                     new_strategy = self.decision_engine.decide(metrics)
                     
                     if new_strategy != current_strategy:
@@ -73,7 +95,7 @@ class ARSSMonitor:
                         # on the same iteration when the strategy switches to a blocking one (Ring)
                         current_strategy = new_strategy
                         
-                    metrics.strategy_used = strategy_to_send
+                    metrics.strategy_used = new_strategy
                     self.metrics_collector.record(metrics)
                     
                     # Clean up old metrics

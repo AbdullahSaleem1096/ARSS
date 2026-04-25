@@ -17,6 +17,7 @@ def run_experiment(
     straggler: StragglerInjector = None,
     simulated_bu: float = 0.0,
     simulated_gd: float = None,
+    simulation_schedule: dict = None,
     learning_rate: float = 0.01
 ):
     print(f"Starting {exp_name} with {num_workers} workers.")
@@ -33,6 +34,8 @@ def run_experiment(
     monitor.set_simulated_bu(simulated_bu)
     if simulated_gd is not None:
         monitor.set_simulated_gd(simulated_gd)
+    if simulation_schedule is not None:
+        monitor.set_simulation_schedule(simulation_schedule)
     
     ps_backend = PSBackend(initial_params, learning_rate)
     ring_backend = RingBackend(num_workers, initial_params, learning_rate)
