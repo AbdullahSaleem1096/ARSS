@@ -5,7 +5,6 @@ from arss.model.cnn import SimpleCNN
 from arss.monitor.monitor import ARSSMonitor
 from arss.sync.ps_backend import PSBackend
 from arss.sync.ring_backend import RingBackend
-from arss.sync.hybrid_backend import HybridBackend
 from arss.workers.worker import worker_loop
 from arss.workers.straggler import StragglerInjector
 from arss.metrics.plotter import MetricsPlotter
@@ -37,7 +36,6 @@ def run_experiment(
     
     ps_backend = PSBackend(initial_params, learning_rate)
     ring_backend = RingBackend(num_workers, initial_params, learning_rate)
-    hybrid_backend = HybridBackend(ps_backend, ring_backend)
     
     worker_processes = []
     for i in range(num_workers):
@@ -52,7 +50,6 @@ def run_experiment(
                 monitor.get_worker_conn(i),
                 ps_backend,
                 ring_backend,
-                hybrid_backend,
                 straggler,
                 learning_rate
             )

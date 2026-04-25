@@ -16,7 +16,6 @@ def worker_loop(
     strategy_conn,
     ps_backend: SyncBackend,
     ring_backend: SyncBackend,
-    hybrid_backend: SyncBackend,
     straggler_injector: Optional[StragglerInjector] = None,
     learning_rate: float = 0.01
 ):
@@ -87,8 +86,6 @@ def worker_loop(
                 updated_params = ps_backend.sync(worker_id, gradients)
             elif strategy == "Ring":
                 updated_params = ring_backend.sync(worker_id, gradients)
-            elif strategy == "Hybrid":
-                updated_params = hybrid_backend.sync(worker_id, gradients)
             else:
                 raise ValueError(f"Unknown strategy: {strategy}")
                 

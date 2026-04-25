@@ -29,8 +29,11 @@ class DecisionEngine:
         # BU saturation overrides PS if server is completely choked
         if bu > 0.8:
             target = "Ring"
-        elif sr <= 1.5 and 0.3 < gd < 0.7:
-            target = "Hybrid"
+        elif sr <= 1.5:
+            if gd <= 0.5:
+                target = "PS"
+            else:
+                target = "Ring"
             
         self.history.append(target)
         
