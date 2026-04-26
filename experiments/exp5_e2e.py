@@ -12,7 +12,8 @@ if __name__ == "__main__":
     
     schedule = {
         0: {'bu': 0.2, 'gd': 0.1},
-        16: {'bu': 0.9}
+        6: {'bu': 0.2, 'gd': 0.7},
+        16: {'bu': 0.3, 'gd': 0.1}
     }
     
     run_experiment(

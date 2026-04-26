@@ -1,0 +1,39 @@
+logs after running "python -m arss.experiments.exp5_e2e"
+
+[Monitor] Updating simulated BU to 0.2
+[Monitor] Updating simulated GD to 0.1
+[Decision] Iter 0: SR=1.14, GD=0.10, BU=0.20 | Vote: Ring | Active: Ring
+[Decision] Iter 1: SR=1.03, GD=0.10, BU=0.20 | Vote: Ring | Active: Ring
+[Decision] Iter 2: SR=1.01, GD=0.10, BU=0.20 | Vote: Ring | Active: Ring
+[Decision] Iter 3: SR=1.04, GD=0.10, BU=0.20 | Vote: Ring | Active: Ring
+[Decision] Iter 4: SR=1.06, GD=0.10, BU=0.20 | Vote: Ring | Active: Ring
+[Decision] Iter 5: SR=1.02, GD=0.10, BU=0.20 | Vote: Ring | Active: Ring
+[Decision] Iter 6: SR=2.82, GD=0.10, BU=0.20 | Vote: PS | Active: Ring
+[Decision] Iter 7: SR=2.89, GD=0.10, BU=0.20 | Vote: PS | Active: Ring
+[Decision] Iter 8: *** SWITCHING Ring -> PS (after 3 consecutive votes) ***
+[Decision] Iter 8: SR=2.85, GD=0.10, BU=0.20 | Vote: PS | Active: PS
+[Decision] Iter 9: SR=2.92, GD=0.10, BU=0.20 | Vote: PS | Active: PS
+[Decision] Iter 10: SR=3.24, GD=0.10, BU=0.20 | Vote: PS | Active: PS
+[Decision] Iter 11: SR=3.22, GD=0.10, BU=0.20 | Vote: PS | Active: PS
+[Decision] Iter 12: SR=3.21, GD=0.10, BU=0.20 | Vote: PS | Active: PS
+[Decision] Iter 13: SR=3.18, GD=0.10, BU=0.20 | Vote: PS | Active: PS
+[Decision] Iter 14: SR=3.12, GD=0.10, BU=0.20 | Vote: PS | Active: PS
+[Decision] Iter 15: SR=3.13, GD=0.10, BU=0.20 | Vote: PS | Active: PS
+[Monitor] Updating simulated BU to 0.9
+[Decision] Iter 16: SR=3.16, GD=0.10, BU=0.90 | Vote: Ring | Active: PS
+[Decision] Iter 17: SR=2.88, GD=0.10, BU=0.90 | Vote: Ring | Active: PS
+[Decision] Iter 18: *** SWITCHING PS -> Ring (after 3 consecutive votes) ***
+[Decision] Iter 18: SR=3.11, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 19: SR=3.09, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 20: SR=3.17, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 21: SR=3.14, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 22: SR=3.17, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 23: SR=3.16, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 24: SR=3.04, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 25: SR=2.95, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 26: SR=3.08, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 27: SR=3.07, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 28: SR=3.13, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Decision] Iter 29: SR=3.14, GD=0.10, BU=0.90 | Vote: Ring | Active: Ring
+[Plotter] Saved plot to exp5_real_world_e2e.png
+Finished exp5_real_world_e2e. Results saved to exp5_real_world_e2e.png
